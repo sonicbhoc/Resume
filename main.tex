@@ -1,0 +1,432 @@
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+%	The MIT License (MIT)
+%
+%	Copyright (c) 2015 Jan Küster
+%
+%	Permission is hereby granted, free of charge, to any person obtaining a copy
+%	of this software and associated documentation files (the "Software"), to deal
+%	in the Software without restriction, including without limitation the rights
+%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%	copies of the Software, and to permit persons to whom the Software is
+%	furnished to do so, subject to the following conditions:
+%	
+%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%	THE SOFTWARE.
+%	
+%
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+
+
+%============================================================================%
+%
+%	DOCUMENT DEFINITION
+%
+%============================================================================%
+
+%we use article class because we want to fully customize the page and dont use a cv template
+\documentclass[10pt,letterpaper]{article}	
+
+
+%----------------------------------------------------------------------------------------
+%	ENCODING
+%----------------------------------------------------------------------------------------
+
+%we use utf8 since we want to build from any machine
+\usepackage[utf8]{inputenc}		
+
+%----------------------------------------------------------------------------------------
+%	LOGIC
+%----------------------------------------------------------------------------------------
+
+% provides \isempty test
+\usepackage{xifthen}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+% some tex-live fonts - choose your own
+
+%\usepackage[defaultsans]{droidsans}
+%\usepackage[default]{comfortaa}
+%\usepackage{cmbright}
+\usepackage[default]{raleway}
+%\usepackage{fetamont}
+%\usepackage[default]{gillius}
+%\usepackage[light,math]{iwona}
+%\usepackage[thin]{roboto} 
+
+% set font default
+\renewcommand*\familydefault{\sfdefault} 	
+\usepackage[T1]{fontenc}
+
+% more font size definitions
+\usepackage{moresize}		
+
+
+%----------------------------------------------------------------------------------------
+%	PAGE LAYOUT  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%debug page outer frames
+%\usepackage{showframe}			
+
+
+%define page styles using geometry
+\usepackage[letterpaper]{geometry}		
+
+% for example, change the margins to 2 inches all round
+\geometry{top=.35cm, bottom=-.6cm, left=-0.1cm, right=0cm} 	
+
+%use customized header
+\usepackage{fancyhdr}				
+\pagestyle{fancy}
+
+%less space between header and content
+\setlength{\headheight}{0pt}		
+
+
+%customize entries left, center and right
+\lhead{}
+\chead{}
+\rhead{}
+
+\newcommand{\padding}{1cm}
+\newcommand{\innerwidth}{\linewidth-\padding-\padding}
+
+%indentation is zero
+\setlength{\parindent}{0mm}
+
+%----------------------------------------------------------------------------------------
+%	TABLE /ARRAY DEFINITIONS
+%---------------------------------------------------------------------------------------- 
+
+%for layouting tables
+\usepackage{multicol}			
+\usepackage{multirow}
+
+%extended aligning of tabular cells
+\usepackage{array}
+
+\newcolumntype{x}[1]{%
+>{\raggedleft\hspace{0pt}}p{#1}}%
+
+
+%----------------------------------------------------------------------------------------
+%	GRAPHICS DEFINITIONS
+%---------------------------------------------------------------------------------------- 
+
+%for header image
+\usepackage{graphicx}
+
+%for floating figures
+\usepackage{wrapfig}
+\usepackage{float}
+%\floatstyle{boxed} 
+%\restylefloat{figure}
+
+%for drawing graphics		
+\usepackage{tikz}				
+\usetikzlibrary{shapes, backgrounds,mindmap, trees}
+
+
+%----------------------------------------------------------------------------------------
+%	Color DEFINITIONS
+%---------------------------------------------------------------------------------------- 
+\usepackage{transparent}
+\usepackage{color}
+
+%accent color
+\definecolor{sectcol}{RGB}{148,87,235}
+
+%dark background accent color
+\definecolor{bgcol}{RGB}{110,110,110}
+
+%light background / accent color
+\definecolor{softcol}{RGB}{235, 148, 87}
+
+% light bg
+\definecolor{light}{RGB}{210, 210, 210}
+
+%============================================================================%
+%
+%
+%	DEFINITIONS
+%
+%
+%============================================================================%
+
+%----------------------------------------------------------------------------------------
+% 	HEADER
+%----------------------------------------------------------------------------------------
+
+% remove top header line
+\renewcommand{\headrulewidth}{0pt} 
+
+%remove botttom header line
+\renewcommand{\footrulewidth}{0pt}	  	
+
+%remove pagenum
+\renewcommand{\thepage}{}	
+
+%remove section num		
+\renewcommand{\thesection}{}			
+
+%----------------------------------------------------------------------------------------
+% 	ARROW GRAPHICS in Tikz
+%----------------------------------------------------------------------------------------
+
+% a six pointed arrow poiting to the left
+\newcommand{\tzlarrow}{(0,0) -- (0.2,0) -- (0.3,0.2) -- (0.2,0.4) -- (0,0.4) -- (0.1,0.2) -- cycle;}	
+
+% include the left arrow into a tikz picture
+% param1: fill color
+%
+\newcommand{\larrow}[1]
+{\begin{tikzpicture}[scale=0.58]
+	 \filldraw[fill=#1!100,draw=#1!100!black]  \tzlarrow
+ \end{tikzpicture}
+}
+
+% a six pointed arrow poiting to the right
+\newcommand{\tzrarrow}{ (0,0.2) -- (0.1,0) -- (0.3,0) -- (0.2,0.2) -- (0.3,0.4) -- (0.1,0.4) -- cycle;}
+
+% include the right arrow into a tikz picture
+% param1: fill color
+%
+\newcommand{\rarrow}[1]
+{\begin{tikzpicture}[scale=0.7]
+	 \filldraw[fill=#1!100,draw=#1!100!black]  \tzrarrow
+ \end{tikzpicture}
+}
+
+
+
+%----------------------------------------------------------------------------------------
+%	custom sections
+%----------------------------------------------------------------------------------------
+
+% create a coloured box with arrow and title as cv section headline
+% param 1: section title
+%
+\newcommand{\cvsection}[1]
+{
+\colorbox{sectcol}{\mystrut \makebox[1\linewidth][l]{
+\larrow{bgcol} \hspace{-8pt} \larrow{bgcol} \hspace{-8pt} \larrow{bgcol} \textcolor{white}{\textbf{#1}}\hspace{4pt}
+}}\\
+}
+
+%create a coloured arrow with title as cv meta section section
+% param 1: meta section title
+%
+\newcommand{\metasection}[2]
+{
+\begin{tabular*}{1\textwidth}{p{2.5cm} p{15cm}}
+\larrow{bgcol}	\normalsize{\textcolor{sectcol}{#1}}&#2\\[8pt]
+\end{tabular*}
+}
+
+%----------------------------------------------------------------------------------------
+%	 CV EVENT
+%----------------------------------------------------------------------------------------
+
+% creates a stretched box as cv entry headline followed by two paragraphs about 
+% the work you did
+% param 1:	event time i.e. 2014 or 2011-2014 etc.
+% param 2:	event name (what did you do?)
+% param 3:	institution (where did you work / study)
+% param 4:	what was your position
+% param 5:	some words about your contributions
+%
+\newcommand{\cvevent}[5]
+{
+\vspace{8pt}
+	\begin{tabular*}{0.6\linewidth}{ p{12cm} x{3cm}}
+\textbf{#2} \textcolor{bgcol}{(#3)}&\textcolor{bgcol}{#1}\\[4pt]
+	\end{tabular*}
+\vspace{-12pt}
+\textcolor{softcol}{\hrule}
+\vspace{6pt}
+	\begin{tabular*}{1\textwidth}{l}
+		 \larrow{sectcol}  #4\\[4.5pt]
+		 \larrow{sectcol}  #5\\[6pt]
+	\end{tabular*}
+\vspace{-4pt}
+}
+
+% creates a stretched box as 
+\newcommand{\cveventmeta}[2]
+{
+	\mbox{\mystrut \hspace{87pt}\textit{#1}}\\
+	#2
+}
+
+%----------------------------------------------------------------------------------------
+% CUSTOM STRUT FOR EMPTY BOXES
+%----------------------------------------- -----------------------------------------------
+\newcommand{\mystrut}{\rule[-.3\baselineskip]{0pt}{\baselineskip}}
+
+%----------------------------------------------------------------------------------------
+% CUSTOM LOREM IPSUM
+%----------------------------------------------------------------------------------------
+\newcommand{\lorem}
+{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.}
+
+
+
+%============================================================================%
+%
+%
+%
+%	DOCUMENT CONTENT
+%
+%
+%
+%============================================================================%
+\begin{document}
+
+%use our custom fancy header definitions
+\pagestyle{fancy}	
+
+%----------------------------------------------------------------------------------------
+% HEADLINE / BASIC INFORMATION
+%----------------------------------------------------------------------------------------
+\fcolorbox{bgcol}{bgcol}{
+\begin{minipage}[c][0.1\textheight][t]{\linewidth}
+\begin{center}
+	\vspace{18pt}
+	\textcolor{light}{\small{Embedded and .NET Software Developer $\cdot$  Bloomfield, CT  $\cdot$  charles.christie.ii@hey.com  $\cdot$ +1 860 840 7973}}\\
+	\HUGE{\textcolor{white}{\textsc{Charles J. Christie, II}} } \textcolor{sectcol}{\rule[-1mm]{1mm}{0.9cm}} \HUGE{\textcolor{white}{\textsc{Resume}} }
+\end{center}
+\end{minipage}}\\[-4pt]
+%----------------------------------------------------------------------------------------
+% SUMMARY
+%----------------------------------------------------------------------------------------
+\fcolorbox{sectcol}{sectcol}{
+\begin{minipage}[c][0.05\textheight][t]{\linewidth}
+\vspace{-3pt}
+\begin{center}
+\parbox[b]{0.87\linewidth}{
+	\begin{center}
+	\larrow{bgcol}\larrow{bgcol} \textcolor{white}{\large A man would do nothing if he waited until he could do it so well that no one could find fault.} \rarrow{bgcol}\rarrow{bgcol}
+	\end{center}
+}
+\parbox[b][\baselineskip]{\linewidth}{
+	\begin{center}
+		\textcolor{white}{(John Henry Newman)}
+	\end{center}
+}
+\end{center}
+\end{minipage}}\\[-4pt]
+%----------------------------------------------------------------------------------------
+% META
+%----------------------------------------------------------------------------------------
+\fcolorbox{white}{white}{
+\begin{minipage}[c][0.15\textheight][t]{\linewidth}
+\vspace{8pt}
+\begin{center}
+\parbox[c]{\innerwidth}{
+	\parbox[b]{5cm}{
+	\metasection{Title:}{Embedded C/C\#/.NET Software Developer}
+	\metasection{Proficiencies:}{Embedded, Safety-Critical, .NET, C\#, COM, P/Invoke, C, Exstream, Entity Framework}
+	\metasection{Secondaries:}{VB.NET, Java, F\#, COBOL, Python, LaTeX, SQL Server}
+	\metasection{Tools:}{Git, Visual Studio, VSCode, TFS/TVS, SVN, Jenkins}
+	\metasection{Hobbies:}{Coding, Gaming, Music, Biking, Volunteering}
+	}
+}
+\end{center}
+\end{minipage}}\\[-4pt]
+%----------------------------------------------------------------------------------------
+% EXPERIENCE
+%----------------------------------------------------------------------------------------
+\fcolorbox{light}{light}{
+\begin{minipage}[c][0.2875\textheight][t]{\linewidth}
+\vspace{4pt}
+\hspace{26pt}
+\parbox[c]{0.75\linewidth}{
+
+\cvevent{2017 - now}{Software Developer}{General Digital Corporation}{Document and bring into compliance embedded C code for cutting-edge devices}{Make non-validated code with sparse documentation well-documented and FDA-validated}
+
+\cvevent{2014 - 2017}{Junior Developer}{Standard Register/Taylor Communications}{Helped transition from VB.NET to C\# and EF to parse and validate HIPAA-regulated data}{Created both digital and print documents, as well as promotional materials, using Exstream}
+
+}
+\hspace{18pt}
+\textcolor{sectcol}{\rule[-3.2cm]{2pt}{7cm}}
+\hspace{12pt}
+\rotatebox[origin=c]{270}{\HUGE \textsc{Experience}}
+\end{minipage}}\\[-4pt]
+%----------------------------------------------------------------------------------------
+% SUMMARY
+%----------------------------------------------------------------------------------------
+\fcolorbox{bgcol}{bgcol}{
+\begin{minipage}[c][0.03\textheight][t]{\linewidth}
+\vspace{-3pt}
+\begin{center}
+\parbox[b]{0.75\linewidth}{
+	\begin{center}
+	\large
+	\textcolor{white}{View my GitHub profile at: } \textcolor{softcol}{\textbf{https://github.com/sonicbhoc}}
+	\end{center}
+}
+\end{center}
+\end{minipage}}\\[-4pt]
+%----------------------------------------------------------------------------------------
+% EDUCATION
+%----------------------------------------------------------------------------------------
+\fcolorbox{white}{white}{
+\begin{minipage}[c][0.2875\textheight][t]{\linewidth}
+\vspace{1pt}
+\hspace{26pt}
+\parbox[c]{0.75\linewidth}{
+%\cvsection{Education}
+
+\cvevent{2019 - now}{Software Development Mentor}{FIRST Robotics}{Teach students Java and version control and collaboration using GitHub}{Guide students to answers and encourage critical thinking}
+
+\cvevent{2006 - 2010}{System Integrator and Teacher}{Family Day Enterprises}{Received machines donated by Travelers Corp, refurbished them, and built a custom Linux distro}{Used the machines to teach the elderly about computers, then donated the machines to them}
+
+}
+\hspace{18pt}
+\textcolor{sectcol}{\rule[-3.2cm]{2pt}{7cm}}
+\hspace{12pt}
+\rotatebox[origin=c]{270}{\HUGE \textsc{Volunteering}}
+\end{minipage}}\\[-4pt]
+%---------------------------------------------------------------------------------------
+%	QR CODE (optional)
+%----------------------------------------------------------------------------------------
+%\vspace{-136pt}
+%\hspace{0.75\linewidth}
+%\includegraphics[width=103pt]{qrcode}
+%\normalsize
+%\vspace{88pt}
+
+
+
+%-------------------------------------------------------------------------------------------------
+% FOOTER
+%--------------------------------------------------------------------------------------------------
+\fcolorbox{bgcol}{bgcol}{
+\begin{minipage}[c][0.015\textheight][t]{\linewidth}
+\vspace{-8pt}
+\begin{center}
+\parbox[b]{0.75\linewidth}{
+	\begin{center}
+	 \textcolor{white}{Charles J. Christie II} \textcolor{white}{$\cdot$} \textcolor{white}{linkedin.com/in/charleschristieii}
+	\end{center}
+}
+\end{center}
+\end{minipage}}
+%============================================================================%
+%
+%
+%
+%	DOCUMENT END
+%
+%
+%
+%============================================================================%
+\end{document}
