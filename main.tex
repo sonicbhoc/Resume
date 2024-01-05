@@ -28,7 +28,7 @@
 %
 %============================================================================%
 
-%we use article class because we want to fully customize the page and dont use a cv template
+%we use article class because we want to fully customize the page and don't use a cv template
 \documentclass[10pt,letterpaper]{article}	
 
 
@@ -106,7 +106,7 @@
 %	TABLE /ARRAY DEFINITIONS
 %---------------------------------------------------------------------------------------- 
 
-%for layouting tables
+%for laying out tables
 \usepackage{multicol}			
 \usepackage{multirow}
 
@@ -168,7 +168,7 @@
 % remove top header line
 \renewcommand{\headrulewidth}{0pt} 
 
-%remove botttom header line
+%remove bottom header line
 \renewcommand{\footrulewidth}{0pt}	  	
 
 %remove pagenum
@@ -181,7 +181,7 @@
 % 	ARROW GRAPHICS in Tikz
 %----------------------------------------------------------------------------------------
 
-% a six pointed arrow poiting to the left
+% a six pointed arrow pointing to the left
 \newcommand{\tzlarrow}{(0,0) -- (0.2,0) -- (0.3,0.2) -- (0.2,0.4) -- (0,0.4) -- (0.1,0.2) -- cycle;}	
 
 % include the left arrow into a tikz picture
@@ -193,7 +193,7 @@
  \end{tikzpicture}
 }
 
-% a six pointed arrow poiting to the right
+% a six pointed arrow pointing to the right
 \newcommand{\tzrarrow}{ (0,0.2) -- (0.1,0) -- (0.3,0) -- (0.2,0.2) -- (0.3,0.4) -- (0.1,0.4) -- cycle;}
 
 % include the right arrow into a tikz picture
@@ -216,7 +216,7 @@
 %
 \newcommand{\cvsection}[1]
 {
-\colorbox{sectcol}{\mystrut \makebox[1\linewidth][l]{
+\colorbox{sectcol}{\mystrut\makebox[1\linewidth][l]{
 \larrow{bgcol} \hspace{-8pt} \larrow{bgcol} \hspace{-8pt} \larrow{bgcol} \textcolor{white}{\textbf{#1}}\hspace{4pt}
 }}\\
 }
@@ -262,7 +262,7 @@
 % creates a stretched box as 
 \newcommand{\cveventmeta}[2]
 {
-	\mbox{\mystrut \hspace{87pt}\textit{#1}}\\
+	\mbox{\mystrut\hspace{87pt}\textit{#1}}\\
 	#2
 }
 
@@ -300,7 +300,7 @@
 \begin{minipage}[c][0.1\textheight][t]{\linewidth}
 \begin{center}
 	\vspace{18pt}
-	\textcolor{light}{\small{Embedded and .NET Software Developer $\cdot$  Bloomfield, CT  $\cdot$  charles.christie.ii@hey.com  $\cdot$ +1 860 840 7973}}\\
+	\textcolor{light}{\small{Embedded C and .NET Software Developer $\cdot$  Bloomfield, CT  $\cdot$  charles.christie.ii@hey.com  $\cdot$ +1 860 840 7973}}\\
 	\HUGE{\textcolor{white}{\textsc{Charles J. Christie, II}} } \textcolor{sectcol}{\rule[-1mm]{1mm}{0.9cm}} \HUGE{\textcolor{white}{\textsc{Resume}} }
 \end{center}
 \end{minipage}}\\[-4pt]
@@ -332,9 +332,9 @@
 \begin{center}
 \parbox[c]{\innerwidth}{
 	\parbox[b]{5cm}{
-	\metasection{Title:}{Embedded C/C\#/.NET Software Developer}
-	\metasection{Proficiencies:}{Embedded, Safety-Critical, .NET, C\#, COM, P/Invoke, C, Exstream, Entity Framework}
-	\metasection{Secondaries:}{VB.NET, Java, F\#, COBOL, Python, LaTeX, SQL Server}
+	\metasection{Title:}{Embedded C and .NET (C\#, F\#, and VB.NET) Developer}
+	\metasection{Proficiencies:}{Safety-Critical, Functional Programming, F\#, C\#, COM, P/Invoke, C, Exstream, EF Core}
+	\metasection{Secondaries:}{Category Theory, VB.NET, Java, COBOL, Python, LaTeX, SQL Server}
 	\metasection{Tools:}{Git, Visual Studio, VSCode, TFS/TVS, SVN, Jenkins}
 	\metasection{Hobbies:}{Coding, Gaming, Music, Biking, Volunteering}
 	}
@@ -350,16 +350,17 @@
 \hspace{26pt}
 \parbox[c]{0.75\linewidth}{
 
-\cvevent{2017 - now}{Software Developer}{General Digital Corporation}{Document and bring into compliance embedded C code for cutting-edge devices}{Make non-validated code with sparse documentation well-documented and FDA-validated}
-
+\cvevent{2017 - now}{.NET KVM over IP utility}{General Digital Corporation}{Model domain using F\# to make illegal states unrepresentable and domain logic pure}{Use native Linux kernel functions to read and write HID reports to emulate a KVM}
+\cvevent{2017 - now}{Embedded C Applications}{General Digital Corporation}{Document and bring into compliance embedded C code for cutting-edge devices}{Make non-validated code with sparse documentation well-documented and FDA-validated}
+\cvevent{2020 - 2021}{.NET Full-Stack Web Applications}{General Digital Corporation}{Used F\# for front-end, domain, application, and build system; C\# for Event Store DB and Postgres}{Type-safe RPC with Fable-Remoting; event-driven and event-sourced architecture}
 \cvevent{2014 - 2017}{Junior Developer}{Standard Register/Taylor Communications}{Helped transition from VB.NET to C\# and EF to parse and validate HIPAA-regulated data}{Created both digital and print documents, as well as promotional materials, using Exstream}
 
 }
 \hspace{18pt}
 \textcolor{sectcol}{\rule[-3.2cm]{2pt}{7cm}}
 \hspace{12pt}
-\rotatebox[origin=c]{270}{\HUGE \textsc{Experience}}
-\end{minipage}}\\[-4pt]
+\rotatebox[origin=c]{270}{\HUGE\textsc{Experience}}
+\end{minipage}}\\[0pt]
 %----------------------------------------------------------------------------------------
 % SUMMARY
 %----------------------------------------------------------------------------------------
@@ -374,7 +375,7 @@
 	\end{center}
 }
 \end{center}
-\end{minipage}}\\[-4pt]
+\end{minipage}}\\[0pt]
 %----------------------------------------------------------------------------------------
 % EDUCATION
 %----------------------------------------------------------------------------------------
@@ -393,7 +394,7 @@
 \hspace{18pt}
 \textcolor{sectcol}{\rule[-3.2cm]{2pt}{7cm}}
 \hspace{12pt}
-\rotatebox[origin=c]{270}{\HUGE \textsc{Volunteering}}
+\rotatebox[origin=c]{270}{\HUGE\textsc{Volunteering}}
 \end{minipage}}\\[-4pt]
 %---------------------------------------------------------------------------------------
 %	QR CODE (optional)
